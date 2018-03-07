@@ -7,9 +7,23 @@ pipeline {
     
   }
   stages {
-    stage('core') {
+    stage('setup') {
       steps {
-        sh 'mvn clean compile'
+        sh 'mvn clean'
+      }
+    }
+    stage('alignment') {
+      parallel {
+        stage('alignment') {
+          steps {
+            sh 'mvn compile'
+          }
+        }
+        stage('') {
+          steps {
+            sh 'mvn test'
+          }
+        }
       }
     }
   }
