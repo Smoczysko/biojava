@@ -20,14 +20,7 @@ pipeline {
       post {
         success {
           junit 'biojava-ws/target/surefire-reports/**/*.xml'
-          publishHTML target: [
-            allowMissing: false,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: 'biojava-ws/target/site',
-            reportFiles: 'index.html',
-            reportName: 'WS Report'
-          ]
+          publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'biojava-ws/target/site', reportFiles: 'index.html', reportName: 'Site reports'])
         }
       }
     }
