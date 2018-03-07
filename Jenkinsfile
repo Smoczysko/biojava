@@ -7,9 +7,9 @@ pipeline {
     
   }
   stages {
-    stage('core') {
+    stage('setup') {
       steps {
-        sh 'mvn clean compile'
+        sh 'mvn clean'
       }
     }
   }
