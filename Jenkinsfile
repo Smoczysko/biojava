@@ -13,17 +13,9 @@ pipeline {
       }
     }
     stage('alignment') {
-      parallel {
-        stage('alignment') {
-          steps {
-            sh 'mvn compile'
-          }
-        }
-        stage('') {
-          steps {
-            sh 'mvn test'
-          }
-        }
+      steps {
+        sh 'mvn compile'
+        sh 'mvn test'
       }
     }
   }
