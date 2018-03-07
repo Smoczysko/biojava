@@ -15,28 +15,22 @@ pipeline {
       steps {
         sh 'mvn compile --projects biojava-ws'
         sh 'mvn test --projects biojava-ws'
-        sh 'mvn site --projects biojava-ws'
       }
       post {
         success {
           junit 'biojava-ws/target/surefire-reports/**/*.xml'
-          publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'biojava-ws/target/site', reportFiles: 'index.html', reportName: 'Site reports'])
         }
       }
     }
+    stage('deployment') {
+          steps {
+            sh 'mvn package --projects biojava-ws'
+          }
+        }
   }
   post {
     always {
       echo "Send notifications for result: ${currentBuild.result}"
-    }
-    changed {
-      script {
-        if (currentBuild.currentResult == 'FAILURE') {
-            emailext subject: 'Biojava build failed',
-                body: 'Your build has failed!',
-                to: 'darkstariw@gmail.com'
-        }
-      }
     }
   }
 }
