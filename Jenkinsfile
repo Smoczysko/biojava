@@ -4,6 +4,7 @@ pipeline {
       image 'maven:3-alpine'
       args '-v /root/.m2:/root/.m2'
     }
+    
   }
   stages {
     stage('setup') {
@@ -19,18 +20,23 @@ pipeline {
       post {
         success {
           junit 'biojava-ws/target/surefire-reports/**/*.xml'
+          
         }
+        
       }
     }
     stage('deployment') {
-          steps {
-            sh 'mvn package --projects biojava-ws'
-          }
-        }
+      steps {
+        sh 'mvn package --projects biojava-ws'
+        archiveArtifacts(artifacts: 'biojava-ws/target/biojava-ws-*.jar', onlyIfSuccessful: true)
+      }
+    }
   }
   post {
     always {
       echo "Send notifications for result: ${currentBuild.result}"
+      
     }
+    
   }
 }
