@@ -12,5 +12,19 @@ pipeline {
         sh 'mvn clean'
       }
     }
+    stage('alignment') {
+      parallel {
+        stage('alignment') {
+          steps {
+            sh 'mvn compile'
+          }
+        }
+        stage('') {
+          steps {
+            sh 'mvn test'
+          }
+        }
+      }
+    }
   }
 }
