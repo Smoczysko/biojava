@@ -16,18 +16,15 @@ pipeline {
       steps {
         sh 'mvn compile --projects biojava-alignment'
         sh 'mvn test --projects biojava-alignment'
-      }
-    }
-    stage('ontology') {
-      steps {
-        sh 'mvn compile --projects biojava-ontology'
-        sh 'mvn test --projects biojava-ontology'
+        sh 'mvn site --projects biojava-alignment'
       }
     }
   }
   post {
     always {
       junit 'biojava-*/target/surefire-reports/**/*.xml'
+      
     }
+    
   }
 }
