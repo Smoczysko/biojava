@@ -307,6 +307,18 @@
 					</executions>
 				</plugin>
 
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>3.9.0</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>3.0.0</version>
+				</plugin>
+
 			</plugins>
 		</pluginManagement>
 
@@ -641,10 +653,7 @@
 	</profiles>
 
 	<modules>
-
-		<module>biojava-core</module>
 		<module>biojava-alignment</module>
-		<module>biojava-structure</module>
 		<module>biojava-structure-gui</module>
 		<module>biojava-sequencing</module>
 		<module>biojava-genome</module>
