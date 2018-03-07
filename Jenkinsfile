@@ -31,17 +31,17 @@ pipeline {
         }
       }
     }
-    post {
-      always {
-        echo "Send notifications for result: ${currentBuild.result}"
-      }
-      changed {
-        script {
-          if (currentBuild.currentResult == 'FAILURE') {
-              emailext subject: 'Biojava build failed',
-                  body: 'Your build has failed!',
-                  to: 'darkstariw@gmail.com'
-          }
+  }
+  post {
+    always {
+      echo "Send notifications for result: ${currentBuild.result}"
+    }
+    changed {
+      script {
+        if (currentBuild.currentResult == 'FAILURE') {
+            emailext subject: 'Biojava build failed',
+                body: 'Your build has failed!',
+                to: 'darkstariw@gmail.com'
         }
       }
     }
