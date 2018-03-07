@@ -25,4 +25,9 @@ pipeline {
       }
     }
   }
+  post {
+    always {
+      junit 'biojava-*/target/surefire-reports/**/*.xml'
+    }
+  }
 }
