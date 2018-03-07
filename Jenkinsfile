@@ -14,8 +14,14 @@ pipeline {
     }
     stage('alignment') {
       steps {
-        sh 'mvn compile'
-        sh 'mvn test'
+        sh 'mvn compile --projects biojava-alignment'
+        sh 'mvn test --projects biojava-alignment'
+      }
+    }
+    stage('ontology') {
+      steps {
+        sh 'mvn compile --projects biojava-ontology'
+        sh 'mvn test --projects biojava-ontology'
       }
     }
   }
